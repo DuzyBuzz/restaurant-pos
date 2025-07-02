@@ -1,0 +1,7 @@
+{
+  "name": "flexi-dev",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
