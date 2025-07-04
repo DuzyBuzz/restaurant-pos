@@ -21,7 +21,10 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router, private supabaseService: SupabaseService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    window.location.reload();
+
+  }
 
   async login() {
     const user = await this.supabaseService.login(this.userName, this.password);
@@ -42,6 +45,5 @@ export class LoginPage implements OnInit {
 
   checkForUpdates() {
     // Reloads the app, fetching the latest deployed version from Vercel
-    window.location.reload();
   }
 }
