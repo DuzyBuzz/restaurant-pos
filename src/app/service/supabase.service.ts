@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SupabaseService {
-  private supabase: SupabaseClient;
+  public supabase: SupabaseClient; // <-- change 'private' to 'public'
   // Observable to track current user
   private _currentUser: BehaviorSubject<User | null | false> = new BehaviorSubject<User | null | false>(null);
   public currentUser$: Observable<User | null | false> = this._currentUser.asObservable();
@@ -22,7 +22,7 @@ export class SupabaseService {
       .select('*')
       .eq('name', userName)
       .eq('password', password)
-      .single(); // returns one row or null
+      .single();
 
     if (error) {
       console.error('Login error:', error.message);

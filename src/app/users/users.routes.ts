@@ -9,10 +9,10 @@ export const usersRoutes: Routes = [
         path: 'home',
         loadComponent: () => import('./pages/home/home.page').then(m => m.HomePage)
       },
-      // {
-      //   path: 'crud',
-      //   loadComponent: () => import('./pages/crud/crud.page').then(m => m.CrudPage)
-      // },
+      {
+        path: 'crud',
+        loadComponent: () => import('./pages/crud/crud.page').then(m => m.CrudPage)
+      },
       {
         path: '',
         redirectTo: 'home',

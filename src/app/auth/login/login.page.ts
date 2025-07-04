@@ -28,17 +28,18 @@ export class LoginPage implements OnInit {
   async login() {
     const user = await this.supabaseService.login(this.userName, this.password);
     if (user) {
-      // Login success, navigate or store user info
-      console.log('Login success:', user);
-      this.router.navigate(['/home']);
+      // Login success, navigate to /home
+      this.router.navigate(['/users/home']);
     } else {
-      // Login failed, show error using Ionic toast
-      const toast = document.createElement('ion-toast');
-      toast.message = 'Invalid username or password';
-      toast.duration = 2000;
-      toast.color = 'danger';
-      document.body.appendChild(toast);
-      toast.present();
+      // Login failed, show error
+      const { ToastController } = await import('@ionic/angular');
+      const toastController = new ToastController();
+      const toast = await toastController.create({
+        message: 'Invalid username or password',
+        duration: 2000,
+        color: 'danger'
+      });
+      await toast.present();
     }
   }
 

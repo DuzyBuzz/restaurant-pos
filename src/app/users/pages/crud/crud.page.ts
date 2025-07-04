@@ -33,14 +33,6 @@ export class CrudPage implements OnInit {
   items: any[] = [];
   editId: number | null = null;
 
-
-  ngOnInit() {
-
-  //realtime update of 
-    // this.loadItems();
-  }
-
-
   editItemName = '';
   editDescription = '';
   editPrice: number | null = null;
@@ -48,58 +40,61 @@ export class CrudPage implements OnInit {
 
   constructor(private supabaseService: SupabaseService) {}
 
+  ngOnInit() {
+    this.loadItems();
+  }
+
   async ionViewWillEnter() {
-    // await this.loadItems();
     // Optionally: setup realtime here if needed
   }
 
-  // async addItem() {
-  //   if (!this.itemName || !this.description || !this.price) return;
-  //   await this.supabaseService.supabase.from('items').insert([
-  //     { item: this.itemName, description: this.description, price: this.price }
-  //   ]);
-  //   this.itemName = '';
-  //   this.description = '';
-  //   this.price = null;
-  //   await this.loadItems();
-  // }
+  async addItem() {
+    if (!this.itemName || !this.description || !this.price) return;
+    await this.supabaseService.supabase.from('items').insert([
+      { item: this.itemName, description: this.description, price: this.price }
+    ]);
+    this.itemName = '';
+    this.description = '';
+    this.price = null;
+    await this.loadItems();
+  }
 
-  // async loadItems() {
-  //   const { data, error } = await this.supabaseService.supabase
-  //     .from('items')
-  //     .select('*')
-  //     .order('id', { ascending: false });
-  //   console.log('Fetched items:', data, 'Error:', error);
-  //   this.items = data || [];
-  // }
+  async loadItems() {
+    const { data, error } = await this.supabaseService.supabase
+      .from('items')
+      .select('*')
+      .order('id', { ascending: false });
+    console.log('Fetched items:', data, 'Error:', error);
+    this.items = data || [];
+  }
 
-  // startEdit(item: any) {
-  //   this.editId = item.id;
-  //   this.editItemName = item.item;
-  //   this.editDescription = item.description;
-  //   this.editPrice = item.price;
-  // }
+  startEdit(item: any) {
+    this.editId = item.id;
+    this.editItemName = item.item;
+    this.editDescription = item.description;
+    this.editPrice = item.price;
+  }
 
-  // cancelEdit() {
-  //   this.editId = null;
-  //   this.editItemName = '';
-  //   this.editDescription = '';
-  //   this.editPrice = null;
-  // }
+  cancelEdit() {
+    this.editId = null;
+    this.editItemName = '';
+    this.editDescription = '';
+    this.editPrice = null;
+  }
 
-  // async updateItem() {
-  //   if (!this.editId || !this.editItemName || !this.editDescription || !this.editPrice) return;
-  //   await this.supabaseService.supabase.from('items').update({
-  //     item: this.editItemName,
-  //     description: this.editDescription,
-  //     price: this.editPrice
-  //   }).eq('id', this.editId);
-  //   this.cancelEdit();
-  //   await this.loadItems();
-  // }
+  async updateItem() {
+    if (!this.editId || !this.editItemName || !this.editDescription || !this.editPrice) return;
+    await this.supabaseService.supabase.from('items').update({
+      item: this.editItemName,
+      description: this.editDescription,
+      price: this.editPrice
+    }).eq('id', this.editId);
+    this.cancelEdit();
+    await this.loadItems();
+  }
 
-  // async deleteItem(id: number) {
-  //   await this.supabaseService.supabase.from('items').delete().eq('id', id);
-  //   await this.loadItems();
-  // }
+  async deleteItem(id: number) {
+    await this.supabaseService.supabase.from('items').delete().eq('id', id);
+    await this.loadItems();
+  }
 }
