@@ -22,7 +22,6 @@ export class LoginPage implements OnInit {
   constructor(private router: Router, private supabaseService: SupabaseService) {}
 
   ngOnInit() {
-    window.location.reload();
 
   }
 
@@ -44,6 +43,8 @@ export class LoginPage implements OnInit {
   }
 
   checkForUpdates() {
-    // Reloads the app, fetching the latest deployed version from Vercel
+    // Reloads the app, fetching the latest deployed version from 
+    window.location.reload();
+    
   }
 }
