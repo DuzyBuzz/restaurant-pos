@@ -39,4 +39,9 @@ export class LoginPage implements OnInit {
       toast.present();
     }
   }
+
+  checkForUpdates() {
+    // Reloads the app, fetching the latest deployed version from Vercel
+    window.location.reload();
+  }
 }
