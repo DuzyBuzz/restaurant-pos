@@ -1,13 +1,15 @@
 import { Routes } from '@angular/router';
+import { usersRoutes } from './users/users.routes';
+import { authRoutes } from './auth/auth.routes';
+import { sharedRoutes } from './shared/shared.routes';
 
 export const routes: Routes = [
-  {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
-  },
+  ...authRoutes,
+  ...usersRoutes,
+  ...sharedRoutes,
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full',
-  },
+  }
 ];

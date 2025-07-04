@@ -1,0 +1,137 @@
+
+<ion-content [fullscreen]="true">
+
+
+  <!-- Tailwind Analytics Section Start -->
+  <div class="w-full max-w-7xl mx-auto px-4 py-6 ">
+    <div class="grid grid-cols-2 gap-6">
+      <div class="bg-blue-500 text-white rounded-xl p-6 shadow flex flex-col items-center">
+        <div class="text-lg font-semibold">Total Sales</div>
+        <div class="text-3xl font-bold mt-2">$12,500</div>
+      </div>
+      <div class="bg-green-500 text-white rounded-xl p-6 shadow flex flex-col items-center">
+        <div class="text-lg font-semibold">Orders</div>
+        <div class="text-3xl font-bold mt-2">320</div>
+      </div>
+      <div class="bg-yellow-400 text-gray-900 rounded-xl p-6 shadow flex flex-col items-center">
+        <div class="text-lg font-semibold">Customers</div>
+        <div class="text-3xl font-bold mt-2">150</div>
+      </div>
+      <div class="bg-purple-500 text-white rounded-xl p-6 shadow flex flex-col items-center">
+        <div class="text-lg font-semibold">Revenue</div>
+        <div class="text-3xl font-bold mt-2">$8,200</div>
+      </div>
+    </div>
+
+    <!-- Ngx-Charts Graphs Section Start -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-12">
+      <!-- Bar Chart -->
+      <div class="bg-white rounded-xl shadow p-4 flex flex-col">
+        <div class="font-semibold mb-2 text-gray-900">Bar Vertical</div>
+        <div class="flex-1 flex items-center justify-center">
+          <ngx-charts-bar-vertical
+            [results]="barChartData"
+            [scheme]="colorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Day"
+            yAxisLabel="Sales"
+            [roundEdges]="true"
+            style="width:100%; height:220px;"
+          ></ngx-charts-bar-vertical>
+        </div>
+      </div>
+      <!-- Pie Chart -->
+      <div class="bg-white rounded-xl shadow p-4 flex flex-col">
+        <div class="font-semibold mb-2 text-gray-900">Pie Chart</div>
+        <div class="flex-1 flex items-center justify-center">
+          <ngx-charts-pie-chart
+            [results]="pieChartData"
+            [scheme]="colorScheme"
+            [legend]="true"
+            [labels]="true"
+            [doughnut]="false"
+            style="width:100%; height:220px;"
+          ></ngx-charts-pie-chart>
+        </div>
+      </div>
+      <!-- Line Chart -->
+      <div class="bg-white rounded-xl shadow p-4 flex flex-col">
+        <div class="font-semibold mb-2 text-gray-900">Line Chart</div>
+        <div class="flex-1 flex items-center justify-center">
+          <ngx-charts-line-chart
+            [results]="lineChartData"
+            [scheme]="colorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Day"
+            yAxisLabel="Orders"
+            [autoScale]="true"
+            style="width:100%; height:220px;"
+          ></ngx-charts-line-chart>
+        </div>
+      </div>
+      <!-- Advanced Pie/Doughnut Chart -->
+      <div class="bg-white rounded-xl shadow p-4 flex flex-col">
+        <div class="font-semibold mb-2 text-gray-900">Doughnut Chart</div>
+        <div class="flex-1 flex items-center justify-center">
+          <ngx-charts-pie-chart
+            [results]="pieChartData"
+            [scheme]="colorScheme"
+            [legend]="true"
+            [labels]="true"
+            [doughnut]="true"
+            style="width:100%; height:220px;"
+          ></ngx-charts-pie-chart>
+        </div>
+      </div>
+      <!-- Bar Horizontal -->
+      <div class="bg-white rounded-xl shadow p-4 flex flex-col">
+        <div class="font-semibold mb-2 text-gray-900">Bar Horizontal</div>
+        <div class="flex-1 flex items-center justify-center">
+          <ngx-charts-bar-horizontal
+            [results]="barChartData"
+            [scheme]="colorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Sales"
+            yAxisLabel="Day"
+            [roundEdges]="true"
+            style="width:100%; height:220px;"
+          ></ngx-charts-bar-horizontal>
+        </div>
+      </div>
+      <!-- Area Chart -->
+      <div class="bg-white rounded-xl shadow p-4 flex flex-col">
+        <div class="font-semibold mb-2 text-gray-900">Area Chart</div>
+        <div class="flex-1 flex items-center justify-center">
+          <ngx-charts-area-chart
+            [results]="lineChartData"
+            [scheme]="colorScheme"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="false"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Day"
+            yAxisLabel="Orders"
+            [autoScale]="true"
+            style="width:100%; height:220px;"
+          ></ngx-charts-area-chart>
+        </div>
+      </div>
+    </div>
+    <!-- Ngx-Charts Graphs Section End -->
+  </div>
+  <!-- Tailwind Analytics Section End -->
+
+</ion-content>

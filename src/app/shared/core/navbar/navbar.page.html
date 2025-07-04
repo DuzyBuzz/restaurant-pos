@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="bg-white border-b border-blue-600 shadow-sm">
+    <div class="flex items-center justify-center gap-6 w-full">
+      <a routerLink="/users/home" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+         class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+        <ion-icon name="home-outline" class="text-xl"></ion-icon>
+      </a>
+      <a routerLink="/users/crud" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+         class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+        <ion-icon name="list-outline" class="text-xl"></ion-icon>
+      </a>
+      <a href="#" class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+        <ion-icon name="heart-outline" class="text-xl"></ion-icon>
+      </a>
+      <a href="#" class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+        <ion-icon name="notifications-outline" class="text-xl"></ion-icon>
+      </a>
+      <a href="#" class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+        <ion-icon name="search-outline" class="text-xl"></ion-icon>
+      </a>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">navbar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <nav class="flex items-center justify-center gap-6 w-full bg-white border-b border-gray-200 shadow-sm">
+    <a routerLink="/users/home" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+       class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+      <ion-icon name="home-outline" class="text-xl"></ion-icon>
+    </a>
+    <a routerLink="/users/crud" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+       class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+      <ion-icon name="list-outline" class="text-xl"></ion-icon>
+    </a>
+    <a href="#" class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+      <ion-icon name="heart-outline" class="text-xl"></ion-icon>
+    </a>
+    <a href="#" class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+      <ion-icon name="notifications-outline" class="text-xl"></ion-icon>
+    </a>
+    <a href="#" class="flex flex-col items-center px-2 pb-1 hover:text-blue-600 transition">
+      <ion-icon name="search-outline" class="text-xl"></ion-icon>
+    </a>
+  </nav>
+</ion-content>

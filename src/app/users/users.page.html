@@ -1,0 +1,41 @@
+<ion-header class="shadow">
+  <div class="flex items-center justify-between px-2 py-2 bg-white border-b border-gray-200">
+    <!-- Logo -->
+    <div class="flex items-center gap-1">
+      <img src="assets/images/flexi-dev.jpg" alt="Flexi Dev Logo" class="w-7 h-7 rounded-full shadow" />
+      <span class="ml-1 text-base font-bold text-[#EC2226] tracking-tight leading-none" style="font-family: 'Segoe UI';">
+        F<span class="text-gray-900">lexi</span><span class="text-[#66CADC]">D</span><span class="text-gray-900">ev</span>
+      </span>
+    </div>
+    <!-- User Avatar -->
+    <div>
+      <img src="assets/images/profile.png" alt="User" class="w-7 h-7 rounded-full border-2 border-blue-600 shadow" />
+    </div>
+  </div>
+  <!-- Mobile-friendly horizontal navbar -->
+  <nav class="flex flex-nowrap overflow-x-auto items-center justify-between gap-2 w-full bg-white border-b border-gray-200 shadow-sm px-1 py-1">
+    <span routerLink="/users/home" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+      class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
+      <span class="material-icons text-lg">home</span>
+    </span>
+    <span routerLink="/users/crud" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
+      class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
+      <span class="material-icons text-lg">list_alt</span>
+    </span>
+    <span class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
+      <span class="material-icons text-lg">favorite_border</span>
+    </span>
+    <span class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
+      <span class="material-icons text-lg">notifications_none</span>
+    </span>
+    <span class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
+      <span class="material-icons text-lg">search</span>
+    </span>
+  </nav>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-gray-50">
+  <main class="max-w-7xl mx-auto p-2">
+    <router-outlet></router-outlet>
+  </main>
+</ion-content>

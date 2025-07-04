@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
@@ -35,3 +37,50 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+// For dark mode
+:root {
+  color-scheme: dark;
+}
+body {
+  --ion-background-color: #181818;
+  --ion-text-color: #fff;
+  // ...add more dark variables as needed
+}
+
+// For light mode
+:root {
+  color-scheme: light;
+}
+body {
+  --ion-background-color: #fff;
+  --ion-text-color: #222;
+  // ...add more light variables as needed
+}
