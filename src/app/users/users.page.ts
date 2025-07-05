@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { IonHeader, IonContent, IonMenu,   IonMenuButton, IonTitle, IonButtons, IonToolbar, IonIcon} from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { logoIonic, cashOutline, cubeOutline, statsChartOutline, closeCircleOutline, walletOutline, documentTextOutline, settingsOutline } from 'ionicons/icons';
@@ -20,12 +20,15 @@ import { logoIonic, cashOutline, cubeOutline, statsChartOutline, closeCircleOutl
     IonMenu, 
     IonMenuButton, 
     IonTitle, 
-    IonToolbar],
+    IonToolbar,
+    RouterLink],
   standalone: true
 })
 export class UsersPage implements OnInit, OnDestroy {
   showNav = false;
   isMobile = false;
+
+  @ViewChild('mainMenu', { static: false }) mainMenu?: IonMenu;
 
   private resizeListener = () => this.updateLayout();
 
@@ -42,5 +45,17 @@ export class UsersPage implements OnInit, OnDestroy {
     const width = window.innerWidth;
     this.isMobile = width < 768; // Typical breakpoint for tablets
     this.showNav = !this.isMobile; // showNav only hidden on mobile
+  }
+
+  closeMenu() {
+    if (this.mainMenu) {
+      this.mainMenu.close();
+    } else {
+      // fallback for when ViewChild is not available
+      const menu = document.querySelector('ion-menu');
+      if (menu && (menu as any).close) {
+        (menu as any).close();
+      }
+    }
   }
 }

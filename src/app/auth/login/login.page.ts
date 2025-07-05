@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonItem, IonLabel, IonInput } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonItem, IonLabel, IonInput, ModalController } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 import { SupabaseService } from 'src/app/service/supabase.service';
 
@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   userName = '';
   password = '';
 
-  constructor(private router: Router, private supabaseService: SupabaseService) {}
+  constructor(private router: Router, private supabaseService: SupabaseService, private modalCtrl: ModalController) {}
 
   ngOnInit() {
 
@@ -28,8 +28,13 @@ export class LoginPage implements OnInit {
   async login() {
     const user = await this.supabaseService.login(this.userName, this.password);
     if (user) {
-      // Login success, navigate to /home
-      this.router.navigate(['/users/cashier-pos']);
+      // Dismiss modal if open, then navigate
+      try {
+        await this.modalCtrl.dismiss();
+      } catch (e) {
+        // Modal might not be open, ignore error
+      }
+      this.router.navigate(['/users']);
     } else {
       // Login failed, show error
       const { ToastController } = await import('@ionic/angular');
@@ -43,9 +48,4 @@ export class LoginPage implements OnInit {
     }
   }
 
-  checkForUpdates() {
-    // Reloads the app, fetching the latest deployed version from 
-    window.location.reload();
-    
-  }
 }
