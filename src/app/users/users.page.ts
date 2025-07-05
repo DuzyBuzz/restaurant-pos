@@ -2,13 +2,25 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { IonHeader, IonContent } from "@ionic/angular/standalone";
+import { IonHeader, IonContent, IonMenu,   IonMenuButton, IonTitle, IonButtons, IonToolbar, IonIcon} from "@ionic/angular/standalone";
+import { addIcons } from 'ionicons';
+import { logoIonic, cashOutline, cubeOutline, statsChartOutline, closeCircleOutline, walletOutline, documentTextOutline, settingsOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.page.html',
   styleUrls: ['./users.page.scss'],
-  imports: [IonContent, IonHeader, CommonModule, RouterOutlet],
+  imports: [IonContent, 
+    IonHeader, 
+    CommonModule, 
+    RouterOutlet, 
+    IonButtons, 
+    IonContent, 
+    IonHeader, 
+    IonMenu, 
+    IonMenuButton, 
+    IonTitle, 
+    IonToolbar],
   standalone: true
 })
 export class UsersPage implements OnInit, OnDestroy {

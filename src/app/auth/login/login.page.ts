@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
     const user = await this.supabaseService.login(this.userName, this.password);
     if (user) {
       // Login success, navigate to /home
-      this.router.navigate(['/users/home']);
+      this.router.navigate(['/users/cashier-pos']);
     } else {
       // Login failed, show error
       const { ToastController } = await import('@ionic/angular');

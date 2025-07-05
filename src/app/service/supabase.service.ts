@@ -30,4 +30,28 @@ export class SupabaseService {
     }
     return data; // user row or null
   }
+
+
+
+  // fetch categories
+  async getCategories() {
+    const { data, error } = await this.supabase
+      .from('menu_categories')
+      .select('id, name, icon');
+    if (error) throw error;
+    return data;
+  }
+
+  //fetch menu items
+  async getMenuItems() {
+  const { data, error } = await this.supabase
+    //select from menu table
+    .from('menu')
+    //show only specific fields
+    .select('id, name, description, quantity, price, category_id');
+
+  if (error) throw error;
+  return data;
+}
+
 }
