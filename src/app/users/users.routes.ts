@@ -6,8 +6,8 @@ export const usersRoutes: Routes = [
     loadComponent: () => import('./users.page').then(m => m.UsersPage),
     children: [
       {
-        path: 'home',
-        loadComponent: () => import('./pages/home/home.page').then(m => m.HomePage)
+        path: 'cashier-pos',
+        loadComponent: () => import('./pages/cashier-pos/cashier-pos.page').then(m => m.CashierPosPage)
       },
       {
         path: 'crud',
@@ -15,9 +15,10 @@ export const usersRoutes: Routes = [
       },
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'cashier-pos',
         pathMatch: 'full'
       }
+      
     ]
   }
 ];

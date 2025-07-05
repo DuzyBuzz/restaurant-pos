@@ -1,47 +1,114 @@
-<ion-header class="shadow z-20">
-  <div class="flex items-center justify-between px-2 py-2 bg-white border-b border-gray-200">
-    <!-- Hamburger Menu -->
-    <button (click)="showNav = !showNav" class="mr-2 focus:outline-none">
-      <span class="material-icons text-2xl text-gray-700">menu</span>
-    </button>
-    <!-- Logo -->
-    <div class="flex items-center gap-1">
-      <img src="assets/images/flexi-dev.jpg" alt="Flexi Dev Logo" class="w-7 h-7 rounded-full shadow" />
-      <span class="ml-1 text-base font-bold text-[#EC2226] tracking-tight leading-none" style="font-family: 'Segoe UI';">
-        F<span class="text-gray-900">lexi</span><span class="text-[#66CADC]">D</span><span class="text-gray-900">ev</span>
-      </span>
-    </div>
-    <!-- User Avatar -->
-    <div>
-      <img src="assets/images/profile.png" alt="User" class="w-7 h-7 rounded-full border-2 border-blue-600 shadow" />
-    </div>
-  </div>
-  <!-- Navbar always visible above all -->
-  <nav
-    class="flex flex-nowrap overflow-x-auto items-center justify-between gap-2 w-full bg-white border-b border-gray-200 shadow-sm px-1 py-1 z-20"
-    [ngClass]="{'hidden': !showNav && isMobile, 'flex': showNav || !isMobile}">
-    <span routerLink="/users/home" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
-      class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
-      <span class="material-icons text-lg">home</span>
-    </span>
-    <span routerLink="/users/crud" routerLinkActive="text-blue-600 border-b-2 border-blue-600"
-      class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
-      <span class="material-icons text-lg">list_alt</span>
-    </span>
-    <span class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
-      <span class="material-icons text-lg">favorite_border</span>
-    </span>
-    <span class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
-      <span class="material-icons text-lg">notifications_none</span>
-    </span>
-    <span class="flex items-center gap-1 px-2 py-1 hover:text-blue-600 transition cursor-pointer whitespace-nowrap text-xs text-gray-700">
-      <span class="material-icons text-lg">search</span>
-    </span>
-  </nav>
+<ion-menu class="bg-white" contentId="main-content">
+<ion-header class="bg-white">
+  <ion-toolbar>
+    <ion-title>
+      <div class="flex items-center space-x-2">
+        <!-- Logo Image -->
+        <ion-menu-button class="text-white"></ion-menu-button>
+        <!-- Text -->
+        <span class="text-white font-bold text-lg">DUZY Eats</span>
+      </div>
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="bg-gray-50">
-  <main class="max-w-7xl mx-auto p-2">
+
+
+
+  <ion-content class="ion-padding bg-gray-100">
+    <ul class="space-y-3">
+      <!-- Cashier POS -->
+      <li>
+        <a
+          routerLink="/users/cashier-pos"
+          class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
+        >
+          <span class="material-icons text-green-600 text-xl">point_of_sale</span>
+          <span class="text-gray-800 font-medium">Cashier POS</span>
+        </a>
+      </li>
+
+      <!-- Sales -->
+      <li>
+        <a
+          routerLink="/sales"
+          class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
+        >
+          <span class="material-icons text-yellow-600 text-xl">bar_chart</span>
+          <span class="text-gray-800 font-medium">Sales</span>
+        </a>
+      </li>
+
+      <!-- Inventory -->
+      <li>
+        <a
+          routerLink="/inventory"
+          class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
+        >
+          <span class="material-icons text-blue-600 text-xl">inventory</span>
+          <span class="text-gray-800 font-medium">Inventory</span>
+        </a>
+      </li>
+
+      <!-- Void Transactions -->
+      <li>
+        <a
+          routerLink="/void-transactions"
+          class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
+        >
+          <span class="material-icons text-red-600 text-xl">cancel</span>
+          <span class="text-gray-800 font-medium">Void Transactions</span>
+        </a>
+      </li>
+
+      <!-- Cash Drawer -->
+      <li>
+        <a
+          routerLink="/cash-drawer"
+          class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
+        >
+          <span class="material-icons text-purple-600 text-xl">account_balance_wallet</span>
+          <span class="text-gray-800 font-medium">Cash Drawer</span>
+        </a>
+      </li>
+
+      <!-- Reports -->
+      <li>
+        <a
+          routerLink="/reports"
+          class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
+        >
+          <span class="material-icons text-indigo-600 text-xl">description</span>
+          <span class="text-gray-800 font-medium">Reports</span>
+        </a>
+      </li>
+
+      <!-- Settings -->
+      <li>
+        <a
+          routerLink="/settings"
+          class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
+        >
+          <span class="material-icons text-gray-600 text-xl">settings</span>
+          <span class="text-gray-800 font-medium">Settings</span>
+        </a>
+      </li>
+    </ul>
+  </ion-content>
+</ion-menu>
+
+<!-- Main Content Area -->
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar class="bg-primary">
+      <ion-buttons slot="start">
+        <ion-menu-button class="text-white"></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="text-white">DUZY Eats</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding text-gray-700">
     <router-outlet></router-outlet>
-  </main>
-</ion-content>
+  </ion-content>
+</div>
