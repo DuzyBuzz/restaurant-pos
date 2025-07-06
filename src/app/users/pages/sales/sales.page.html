@@ -1,0 +1,90 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="bg-white items-center justify-centerflex-col md:grid-cols-2">
+    <!-- Scrollable Shortcut Bar -->
+    <div class="w-full overflow-x-auto py-2 bg-white justify-center">
+      <h1 class="text-sm font-bold text-center mb-1 ml-8">Sales</h1>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Sales</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="loading" class="text-center py-8 text-gray-500">Loading sales...</div>
+  <div *ngIf="error" class="text-center py-8 text-red-500">{{ error }}</div>
+
+  <div class="flex justify-end mb-4">
+    <button (click)="exportToExcel()" [disabled]="exporting" class="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2 hover:bg-blue-700 disabled:opacity-50">
+      <span class="material-icons">download</span>
+      {{ exporting ? 'Exporting...' : 'Export to Excel' }}
+    </button>
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <table class="min-w-full bg-white border border-gray-200 rounded shadow">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-3 py-2 border-b text-left">Date</th>
+          <th class="px-3 py-2 border-b text-left">Customer</th>
+          <th class="px-3 py-2 border-b text-left">Total</th>
+          <th class="px-3 py-2 border-b text-left">Cash</th>
+          <th class="px-3 py-2 border-b text-left">Change</th>
+          <th class="px-3 py-2 border-b text-left">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let sale of sales">
+          <tr>
+            <td class="px-3 py-2 border-b">{{ sale.created_at | date:'short' }}</td>
+            <td class="px-3 py-2 border-b">{{ sale.customer_name }}</td>
+            <td class="px-3 py-2 border-b text-left">₱{{ sale.total_price | number:'1.2-2' }}</td>
+            <td class="px-3 py-2 border-b text-left">₱{{ sale.cash_received | number:'1.2-2' }}</td>
+            <td class="px-3 py-2 border-b text-left">₱{{ sale.change | number:'1.2-2' }}</td>
+            <td class="px-3 py-2 border-b text-left">
+              <button (click)="toggleOrderItems(sale)" class="text-blue-600 hover:text-blue-800 flex items-left gap-1">
+                <span class="material-icons">{{ expandedSaleId === sale.id ? 'expand_less' : 'expand_more' }}</span>
+                Details
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="expandedSaleId === sale.id">
+            <td colspan="6" class="bg-gray-50 px-4 py-2">
+              <ng-container *ngIf="orderItems && orderItems[sale.id] && orderItems[sale.id].length > 0; else noItems">
+                <table class="w-full text-xs border">
+                  <thead>
+                    <tr class="bg-gray-200">
+                      <th class="px-2 py-1 border-b text-left">Item</th>
+                      <th class="px-2 py-1 border-b text-left">Description</th>
+                      <th class="px-2 py-1 border-b text-right">Qty</th>
+                      <th class="px-2 py-1 border-b text-right">Price</th>
+                      <th class="px-2 py-1 border-b text-right">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of orderItems[sale.id]">
+                      <td class="px-2 py-1 border-b">{{ item.menu?.name }}</td>
+                      <td class="px-2 py-1 border-b">{{ item.menu?.description }}</td>
+                      <td class="px-2 py-1 border-b text-right">{{ item.quantity }}</td>
+                      <td class="px-2 py-1 border-b text-right">₱{{ item.price | number:'1.2-2' }}</td>
+                      <td class="px-2 py-1 border-b text-right">₱{{ (item.price * item.quantity) | number:'1.2-2' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-container>
+              <ng-template #noItems>
+                <div class="text-gray-400 italic">No items found for this order.</div>
+              </ng-template>
+            </td>
+          </tr>
+        </ng-container>
+        <tr *ngIf="sales.length === 0">
+          <td colspan="6" class="text-center py-4 text-gray-400">No sales found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

@@ -119,17 +119,26 @@
           <span class="text-green-600 font-bold">₱{{ getTotal() | number: '1.2-2' }}</span>
         </div>
 
-        <!-- 🖨️ Paper Size Select -->
-        <!-- <div class="mb-3 flex items-center gap-2">
-          <span class="text-xs font-medium">Paper Size:</span>
-          <select
-            [(ngModel)]="selectedPaperSize"
-            class="text-xs border rounded px-2 py-1 focus:outline-none focus:ring"
-          >
-            <option value="58mm">58mm</option>
-            <option value="80mm">80mm</option>
-          </select>
-        </div> -->
+        <!-- Customer Name and Cash Received Inputs -->
+        <div class="mb-3">
+          <label class="block text-xs font-medium text-gray-700 mb-1">Customer Name</label>
+          <input
+            type="text"
+            [(ngModel)]="customerName"
+            class="w-full border rounded px-2 py-1 text-sm focus:outline-none focus:ring"
+            placeholder="Enter customer name"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="block text-xs font-medium text-gray-700 mb-1">Cash Received</label>
+          <input
+            type="number"
+            [(ngModel)]="cashReceived"
+            class="w-full border rounded px-2 py-1 text-sm focus:outline-none focus:ring"
+            placeholder="Enter cash received"
+            min="0"
+          />
+        </div>
 
         <!-- Buttons -->
         <div class="flex gap-2">
@@ -142,11 +151,12 @@
           </button>
 
           <button
-            (click)="printReceipt()"
-            class="flex-1 text-sm bg-green-600 text-white py-2 rounded flex items-center justify-center gap-1 hover:bg-green-700"
+            (click)="checkout()"
+            [disabled]="isSaving"
+            class="flex-1 text-sm bg-green-600 text-white py-2 rounded flex items-center justify-center gap-1 hover:bg-green-700 disabled:opacity-50"
           >
             <span class="material-icons text-base">shopping_cart_checkout</span>
-            Checkout
+            {{ isSaving ? 'Saving...' : 'Checkout' }}
           </button>
         </div>
       </div>

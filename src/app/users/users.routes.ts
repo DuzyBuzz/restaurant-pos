@@ -10,8 +10,20 @@ export const usersRoutes: Routes = [
         loadComponent: () => import('./pages/cashier-pos/cashier-pos.page').then(m => m.CashierPosPage)
       },
       {
-        path: 'crud',
-        loadComponent: () => import('./pages/crud/crud.page').then(m => m.CrudPage)
+        path: 'sales',
+        loadComponent: () => import('./pages/sales/sales.page').then(m => m.SalesPage)
+      },      
+      {
+        path: 'inventory',
+        loadComponent: () => import('./pages/inventory/inventory.page').then(m => m.InventoryPage)
+      },
+      {
+        path: 'settings',
+        loadComponent: () => import('./pages/settings/settings.page').then(m => m.SettingsPage)
+      },
+      {
+        path: 'system-info',
+        loadComponent: () => import('./pages/system-info/system-info.page').then(m => m.SystemInfoPage)
       },
       {
         path: '',

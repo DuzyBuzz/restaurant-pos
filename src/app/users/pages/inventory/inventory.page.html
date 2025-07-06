@@ -1,0 +1,138 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="bg-white items-center justify-centerflex-col md:grid-cols-2">
+    <!-- Professional Inventory Toolbar -->
+    <div class="w-full bg-white py-3 px-2 flex flex-col md:flex-row md:items-center md:justify-between shadow-none">
+      <div class="flex items-center gap-3 mb-2 md:mb-0">
+        <span class="material-icons text-blue-600 text-2xl">inventory_2</span>
+        <h1 class="text-xl font-bold text-gray-900 tracking-tight">Inventory</h1>
+      </div>
+      <div class="flex gap-2">
+        <button
+          (click)="activeTab = 'categories'"
+          [ngClass]="activeTab === 'categories' ? 'bg-blue-600 text-white shadow' : 'bg-gray-100 text-gray-800 hover:bg-blue-50'"
+          class="px-5 py-2 rounded font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        >
+          <span class="material-icons align-middle mr-1 text-base">category</span>
+          Categories
+        </button>
+        <button
+          (click)="activeTab = 'menu'"
+          [ngClass]="activeTab === 'menu' ? 'bg-green-600 text-white shadow' : 'bg-gray-100 text-gray-800 hover:bg-green-50'"
+          class="px-5 py-2 rounded font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-green-300"
+        >
+          <span class="material-icons align-middle mr-1 text-base">restaurant_menu</span>
+          Menu Items
+        </button>
+      </div>
+    </div>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding bg-white">
+  <div class="mb-6">
+
+    <!-- Categories Tab -->
+    <div *ngIf="activeTab === 'categories'">
+      <h2 class="text-lg font-bold mb-2 flex items-center gap-2 text-gray-800"><span class="material-icons text-blue-600">category</span>Categories</h2>
+      <form (ngSubmit)="addCategory()" class="flex flex-col md:flex-row gap-2 mb-4 items-end bg-gray-50 p-4 rounded shadow">
+        <div class="flex-1">
+          <label class="block text-xs font-medium mb-1 text-gray-700">Name</label>
+          <input [(ngModel)]="newCategory.name" name="catName" required class="border rounded px-2 py-1 text-sm bg-white text-gray-800 w-full focus:ring-2 focus:ring-blue-200" placeholder="Category name" />
+        </div>
+        <div class="flex-1">
+          <label class="block text-xs font-medium mb-1 text-gray-700">Icon</label>
+          <button type="button" (click)="showIconPicker = true" class="border rounded px-2 py-1 text-sm flex items-center gap-2 w-full bg-white text-gray-800 focus:ring-2 focus:ring-blue-200">
+            <span *ngIf="newCategory.icon" class="material-icons align-middle">{{newCategory.icon}}</span>
+            <span *ngIf="!newCategory.icon" class="text-gray-400">Select icon</span>
+          </button>
+          <!-- Icon Picker Popover -->
+          <ion-popover [isOpen]="showIconPicker" (didDismiss)="showIconPicker = false" class="icon-popover">
+            <ng-template>
+              <div class="p-4 w-full max-w-lg max-h-[80vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-2">
+                  <input [(ngModel)]="iconSearch" placeholder="Search icons..." class="border rounded px-2 py-1 text-sm w-full bg-white text-gray-800 focus:ring-2 focus:ring-blue-200" />
+                  <button type="button" (click)="showIconPicker = false" class="ml-2 text-gray-500 hover:text-red-600"><span class="material-icons">close</span></button>
+                </div>
+                <div class="grid grid-cols-6 gap-2 max-h-96 overflow-y-auto">
+                  <button type="button" *ngFor="let icon of filteredCategoryIcons" (click)="newCategory.icon = icon; showIconPicker = false" class="flex flex-col items-center p-2 hover:bg-blue-100 rounded bg-white text-gray-800 border border-gray-200">
+                    <span class="material-icons text-2xl">{{icon}}</span>
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+          </ion-popover>
+        </div>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-1 hover:bg-blue-700 shadow-md mt-2 md:mt-0"><span class="material-icons text-base">add</span>Add</button>
+      </form>
+      <table class="w-full text-sm border mb-6 bg-white text-gray-800 rounded shadow overflow-hidden justify-start items-start text-left">
+        <thead><tr class="bg-blue-50 text-blue-800"><th class="py-2 text-left">ID</th><th class="text-left">Icon</th><th class="text-left">Name</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let cat of categories" class="hover:bg-blue-50 transition text-left">
+            <td class="py-2 text-left">{{cat.id}}</td>
+            <td class="py-2 text-left"><span class="material-icons">{{cat.icon}}</span></td>
+            <td class="py-2 text-left">{{cat.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Menu Tab -->
+    <div *ngIf="activeTab === 'menu'">
+      <h2 class="text-lg font-bold mb-2 flex items-center gap-2 text-gray-800"><span class="material-icons text-green-600">restaurant_menu</span>Menu Items</h2>
+      <form (ngSubmit)="addMenuItem()" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 items-end bg-gray-50 p-4 rounded shadow">
+        <div>
+          <label class="block text-xs font-medium mb-1 text-gray-700">Name</label>
+          <input [(ngModel)]="newMenu.name" name="menuName" required class="border rounded px-2 py-1 text-sm bg-white text-gray-800 w-full focus:ring-2 focus:ring-green-200" placeholder="Menu name" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-gray-700">Description</label>
+          <input [(ngModel)]="newMenu.description" name="menuDesc" class="border rounded px-2 py-1 text-sm bg-white text-gray-800 w-full focus:ring-2 focus:ring-green-200" placeholder="Description" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-gray-700">Price</label>
+          <input type="number" [(ngModel)]="newMenu.price" name="menuPrice" required class="border rounded px-2 py-1 text-sm bg-white text-gray-800 w-full focus:ring-2 focus:ring-green-200" placeholder="Price" min="0" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-gray-700">Quantity</label>
+          <input type="number" [(ngModel)]="newMenu.quantity" name="menuQty" required class="border rounded px-2 py-1 text-sm bg-white text-gray-800 w-full focus:ring-2 focus:ring-green-200" placeholder="Qty" min="0" />
+        </div>
+        <div>
+          <label class="block text-xs font-medium mb-1 text-gray-700">Category</label>
+          <select [(ngModel)]="newMenu.category_id" name="menuCat" required class="border rounded px-2 py-1 text-sm bg-white text-gray-800 w-full focus:ring-2 focus:ring-green-200">
+            <option *ngFor="let cat of categories" [value]="cat.id">{{cat.name}}</option>
+          </select>
+        </div>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded flex items-center gap-1 hover:bg-green-700 shadow-md mt-2 md:mt-0"><span class="material-icons text-base">add</span>Add</button>
+      </form>
+      <table class="w-full text-sm border bg-white text-gray-800 rounded shadow overflow-hidden text-left">
+        <thead><tr class="bg-green-50 text-green-800"><th class="py-2 text-left">ID</th><th class="text-left">Name</th><th class="text-left">Description</th><th class="text-left">Price</th><th class="text-left">Qty</th><th class="text-left">Category</th></tr></thead>
+        <tbody>
+          <tr *ngFor="let menu of menuItems" class="hover:bg-green-50 transition text-left">
+            <td class="py-2 text-left">{{menu.id}}</td>
+            <td class="text-left">{{menu.name}}</td>
+            <td class="text-left">{{menu.description}}</td>
+            <td class="text-left">₱{{menu.price | number:'1.2-2'}}</td>
+            <td class="text-left">{{menu.quantity}}</td>
+            <td class="text-left"><span class="material-icons align-middle">{{menu.menu_categories?.icon}}</span> {{menu.menu_categories?.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="bg-white items-center justify-centerflex-col md:grid-cols-2">
+    <!-- Scrollable Shortcut Bar -->
+    <div class="w-full overflow-x-auto py-2 bg-white justify-center">
+      <h1 class="text-sm font-bold text-center mb-1 ml-8">System Information</h1>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<p class="text-center text-xs text-gray-500 mt-2">Version: {{ appVersion }}</p>
+
+<div class="flex justify-center mt-4">
+  <button ion-button (click)="checkForUpdates()" class="check-updates-btn">
+    <span class="material-icons" style="vertical-align: middle;">refresh</span>
+    <span style="margin-left: 8px; vertical-align: middle;">Check for Updates</span>
+  </button>
+</div>
