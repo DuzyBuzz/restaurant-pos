@@ -11,6 +11,7 @@ import {
   IonRow
 } from '@ionic/angular/standalone';
 import { SupabaseService } from 'src/app/service/supabase.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cashier-pos',
@@ -27,9 +28,11 @@ export class CashierPosPage implements OnInit {
   receiptItems: any[] = [];
   selectedPaperSize: '58mm' | '80mm' = '80mm';
 
+  customerName: string = '';
+  cashReceived: number | null = null;
+  isSaving: boolean = false;
 
-
-  constructor(private supabase: SupabaseService) {}
+  constructor(private supabase: SupabaseService, private toastController: ToastController) {}
 
   async ngOnInit() {
     try {
@@ -54,17 +57,6 @@ export class CashierPosPage implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
   addToReceipt(menu: any) {
     // Make sure you're comparing by ID
     const existingItem = this.receiptItems.find(item => item.id === menu.id);
@@ -82,8 +74,6 @@ export class CashierPosPage implements OnInit {
     }
   }
 
-
-
   increaseQty(item: any) {
     item.qty += 1;
   }
@@ -100,7 +90,6 @@ export class CashierPosPage implements OnInit {
     this.receiptItems = this.receiptItems.filter(i => i.id !== item.id);
   }
 
-
   clearReceipt() {
     this.receiptItems = [];
   }
@@ -109,10 +98,54 @@ export class CashierPosPage implements OnInit {
     return this.receiptItems.reduce((sum, item) => sum + item.price * item.qty, 0);
   }
 
-  checkout() {
-    alert(`Total order: ₱${this.getTotal().toFixed(2)}`);
-    this.clearReceipt();
+  async checkout() {
+    const total = this.getTotal();
+    if (!this.customerName.trim() || !this.cashReceived || this.cashReceived < total) {
+      this.showToast('Please enter a valid customer name and cash received (must be >= total).', 'danger');
+      return;
+    }
+    this.isSaving = true;
+    try {
+      // Save order
+      const { data: orderData, error: orderError } = await this.supabase.createOrder({
+        customer_name: this.customerName,
+        total_price: total,
+        cash_received: this.cashReceived,
+        change: this.cashReceived - total,
+        user_id: 1 // TODO: Replace with actual logged-in user id
+      });
+      if (orderError || !orderData || !orderData[0]) throw orderError || new Error('Order not saved');
+      const orderId = orderData[0].id;
+      // Save order items
+      for (const item of this.receiptItems) {
+        await this.supabase.createOrderItem({
+          order_id: orderId,
+          menu_id: item.id,
+          quantity: item.qty,
+          price: item.price
+        });
+      }
+      this.showToast('Order saved!', 'success');
+      this.clearReceipt();
+      this.customerName = '';
+      this.cashReceived = null;
+    } catch (err: any) {
+      this.showToast('Failed to save order: ' + (err?.message || err), 'danger');
+    } finally {
+      this.isSaving = false;
+    }
   }
+
+  async showToast(message: string, color: string = 'primary') {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000,
+      color,
+      position: 'top'
+    });
+    await toast.present();
+  }
+
   printReceipt() {
   const printContents = document.getElementById('receiptToPrint')?.innerHTML;
   const popupWin = window.open('', '_blank', 'width=400,height=600');

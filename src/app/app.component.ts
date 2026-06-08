@@ -10,11 +10,15 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 })
 export class AppComponent {
   constructor() {
-    // Force dark mode
-    document.body.classList.add('dark');
-
-    // Force light mode
-    document.body.classList.remove('dark');
+    // Apply saved theme
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark') {
+      document.body.classList.add('dark');
+      document.body.classList.remove('light');
+    } else {
+      document.body.classList.remove('dark');
+      document.body.classList.add('light');
+    }
 
     ScreenOrientation.lock({ orientation: 'landscape' });
 

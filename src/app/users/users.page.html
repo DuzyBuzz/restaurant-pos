@@ -1,4 +1,4 @@
-<ion-menu class="bg-white" contentId="main-content">
+<ion-menu class="bg-white" contentId="main-content" #mainMenu>
 <ion-header class="bg-white">
   <ion-toolbar>
     <ion-title>
@@ -12,15 +12,13 @@
   </ion-toolbar>
 </ion-header>
 
-
-
-
   <ion-content class="ion-padding bg-gray-100">
     <ul class="space-y-3">
       <!-- Cashier POS -->
       <li>
         <a
           routerLink="/users/cashier-pos"
+          (click)="closeMenu()"
           class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
         >
           <span class="material-icons text-green-600 text-xl">point_of_sale</span>
@@ -31,7 +29,8 @@
       <!-- Sales -->
       <li>
         <a
-          routerLink="/sales"
+          routerLink="/users/sales"
+          (click)="closeMenu()"
           class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
         >
           <span class="material-icons text-yellow-600 text-xl">bar_chart</span>
@@ -42,7 +41,8 @@
       <!-- Inventory -->
       <li>
         <a
-          routerLink="/inventory"
+          routerLink="/users/inventory"
+          (click)="closeMenu()"
           class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
         >
           <span class="material-icons text-blue-600 text-xl">inventory</span>
@@ -54,6 +54,7 @@
       <li>
         <a
           routerLink="/void-transactions"
+          (click)="closeMenu()"
           class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
         >
           <span class="material-icons text-red-600 text-xl">cancel</span>
@@ -65,6 +66,7 @@
       <li>
         <a
           routerLink="/cash-drawer"
+          (click)="closeMenu()"
           class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
         >
           <span class="material-icons text-purple-600 text-xl">account_balance_wallet</span>
@@ -76,6 +78,7 @@
       <li>
         <a
           routerLink="/reports"
+          (click)="closeMenu()"
           class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
         >
           <span class="material-icons text-indigo-600 text-xl">description</span>
@@ -86,11 +89,23 @@
       <!-- Settings -->
       <li>
         <a
-          routerLink="/settings"
+          routerLink="/users/settings"
+          (click)="closeMenu()"
           class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
         >
           <span class="material-icons text-gray-600 text-xl">settings</span>
           <span class="text-gray-800 font-medium">Settings</span>
+        </a>
+      </li>
+      <!-- System Info -->
+      <li>
+        <a
+          routerLink="/users/system-info"
+          (click)="closeMenu()"
+          class="flex items-center space-x-3 p-3 bg-white rounded-md shadow hover:bg-gray-200 transition"
+        >
+          <span class="material-icons text-gray-600 text-xl">info</span>
+          <span class="text-gray-800 font-medium">System Info</span>
         </a>
       </li>
     </ul>

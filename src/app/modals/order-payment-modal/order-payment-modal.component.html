@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Customer Payment</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Customer Name</ion-label>
+      <ion-input [(ngModel)]="customerName" name="customerName" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cash Received (₱)</ion-label>
+      <ion-input [(ngModel)]="cashReceived" name="cashReceived" type="number" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">
+      Confirm Payment
+    </ion-button>
+  </form>
+</ion-content>

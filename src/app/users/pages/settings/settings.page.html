@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ion-no-border bg-white">
+    <ion-title class="text-black">Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="bg-white">
+  <ion-header collapse="condense" class="bg-white">
+    <ion-toolbar class="bg-white">
+      <ion-title size="large" class="text-black">Settings</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list class="bg-white">
+    <ion-item class="bg-white">
+      <ion-label class="text-black">Dark Mode</ion-label>
+      <ion-toggle slot="end" [(ngModel)]="darkMode" (ionChange)="onThemeToggle()"></ion-toggle>
+    </ion-item>
+    <!-- Add other settings here -->
+  </ion-list>
+</ion-content>
